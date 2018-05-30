@@ -1,0 +1,23 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "pipeline-demo-jenkins-build" 
+  labels:
+    app: "pipeline-demo-jenkins-build"
+spec:
+  triggers: 
+    -
+      type: "ImageChange"
+  source: 
+    git:
+      uri: "https://github.com/tjormola/pipeline-demo-jenkins.git"
+  strategy: 
+    sourceStrategy:
+      from:
+        kind: "ImageStreamTag"
+        name: "jenkins-2-centos7:latest"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "pipeline-demo-jenkins:latest"
+
